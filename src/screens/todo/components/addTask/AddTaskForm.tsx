@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup"
 import React, { useCallback } from "react"
 import { Controller, useForm } from "react-hook-form"
-import { StyleSheet, View, Keyboard } from "react-native"
+import { StyleSheet, View, Keyboard, Text } from "react-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
 import Button from "../../../components/Button"
 import TextInput from "../../../components/TextInput"
@@ -9,7 +9,7 @@ import { useTodoFunction, useTodoState } from "../../../navigation/Stacks/TodoCo
 import { valid } from "./valid"
 
 const AddTaskForm = () => {
-    const { control, handleSubmit, reset } = useForm({
+    const { control, handleSubmit, reset , errors} = useForm({
         resolver: yupResolver(valid)
         , defaultValues: { task: "" }
     })
@@ -23,6 +23,7 @@ const AddTaskForm = () => {
         reset()
     }, [onSaveItem, list])
     return (
+        <View style={styles.padding10}>
         <View style={styles.container}>
             <Controller
                 name="task"
@@ -43,6 +44,8 @@ const AddTaskForm = () => {
             </Button>
 
         </View>
+       {errors.task && <Text>{errors.task.message}</Text>} 
+        </View>
     )
 }
 const styles = StyleSheet.create({
@@ -50,8 +53,9 @@ const styles = StyleSheet.create({
         marginTop: 50,
         width: "100%",
         flexDirection: "row",
-        paddingHorizontal: 10
+        
     },
+    padding10:{paddingHorizontal: 10},
     iconStyle: { fontSize: 24, color: "brown" },
 
 

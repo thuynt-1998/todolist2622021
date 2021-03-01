@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
     
     inputStyles: {
         borderBottomColor: "black",
-        flex:1
+        flex:1,
+        marginBottom:10
     },
     
 })
